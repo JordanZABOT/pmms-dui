@@ -263,22 +263,6 @@ function initPlayer(id, handle, options) {
 
 				if (media.youTubeApi) {
 					options.title = media.youTubeApi.getVideoData().title;
-					console.log(media.youTubeApi.getIframe().contentWindow.document);
-					// Function to check and click the "Skip Ad" button
-					function clickSkipAdButton() {
-						const button = media.youTubeApi.getIframe().contentWindow.document.querySelector('.ytp-skip-ad-button');
-						console.log('Checking for "Skip Ad" button');
-						if (button) {
-							button.click();
-							console.log('Ad skipped');
-						} else {
-							// Check again after a short delay if the button is not found
-							setTimeout(clickSkipAdButton, 1000);
-						}
-					}
-
-					// Start checking for the "Skip Ad" button
-					clickSkipAdButton();
 					media.videoTracks = {length: 1};
 				} else if (media.hlsPlayer) {
 					media.videoTracks = media.hlsPlayer.videoTracks;

@@ -14,8 +14,4 @@ server_scripts {
     'server.lua'
 }
 
-dependencies {
-    'pmms'
-}
-
 

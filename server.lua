@@ -1,12 +1,29 @@
-local baseUrl = GetConvar("web_baseUrl", "")
 local resName = GetCurrentResourceName()
 
 
 CreateThread(function()
-
+    
     print("=============------------ PMMS-DUI ------------=============")
+    print("Waiting for PMMS to start...")
+    local pmmsState = GetResourceState("pmms")
+    local baseUrl = GetConvar("web_baseUrl", "")
+    while pmmsState ~= "started" do
+        Wait(100)
+        pmmsState = GetResourceState("pmms")
+    end
 
-    if GetResourceState("pmms") == "started" then
+    print("PMMS has started. Waiting for base URL to be set...")
+    while baseUrl == "" do 
+        Wait(100)
+        baseUrl = GetConvar("web_baseUrl", "")
+    end
+    if baseUrl ~= "" then
+        url = "https://"..baseUrl
+        print("Base URL has been found!")
+    end
+
+    if pmmsState == "started" then
+        print("PMMS has started.")
         pmmsConfig = LoadResourceFile("pmms", "config.lua")
         if not pmmsConfig then
            print("PMMS-DUI requires the PMMS config file to be present in the pmms resource!")
@@ -22,15 +39,6 @@ CreateThread(function()
         return
     end
 
-
-    if baseUrl == "" then
-        print("PMMS-DUI unable to find the CFX Nucleus URL for DRM Content. This may not work correctly!")
-        local endpoint = GetCurrentServerEndpoint()
-        url = "http://" .. endpoint
-        print("Using default server endpoint: " .. url)
-    else
-        url = "https://"..baseUrl
-    end
 
 
     local finalUrl = url .. "/pmms-dui/"
@@ -59,7 +67,6 @@ CreateThread(function()
                     Wait(1000)
                     -- StartResource("pmms")
                     SetHttpHandler(createHttpHandler())        
-                    print("PMMS-DUI has restarted PMMS. PMMS-DUI is now running.")
                 else
                     print("You must be the server console to run this command.")
                 end
