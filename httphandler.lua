@@ -495,7 +495,7 @@ function CreateHttpHandler(options)
 	end
 end
 
-exports("createHttpHandler", createHttpHandler)
+exports("createHttpHandler", CreateHttpHandler)
 
 exports("getUrl", function(resourceName)
 	local baseUrl = GetConvar("web_baseUrl", "")
