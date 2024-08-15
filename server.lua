@@ -1,17 +1,25 @@
+local debug = GetConvar('dui:debug','false')
+
+local function debugPrint(...)
+    if debug == 'true' then
+       print(...)
+    end
+end
+
 AddEventHandler('onResourceStart', function(resourceName)
     if (GetCurrentResourceName() ~= resourceName) then
       return
     end
     local url = ""
-    print("=============------------ PMMS-DUI ------------=============")
-    print("Check if PMMS is Started...")
+    debugPrint("=============------------ PMMS-DUI ------------=============")
+    debugPrint("Check if PMMS is Started...")
     local pmmsState = GetResourceState("pmms")
     while pmmsState ~= "started" do
         Wait(100)
         pmmsState = GetResourceState("pmms")
     end
 
-    print("Check if baseURL is actived...")
+    debugPrint("Check if baseURL is actived...")
     local baseUrl = GetConvar("web_baseUrl", "")
     while baseUrl == "" do
         Wait(100)
@@ -20,11 +28,11 @@ AddEventHandler('onResourceStart', function(resourceName)
 
     if baseUrl ~= "" then
         url = "https://"..baseUrl
-        print("Base URL has been found!")
+        debugPrint("Base URL has been found!")
     end
 
     if pmmsState == "started" then
-        print("PMMS loading Config.")
+        debugPrint("PMMS loading Config.")
         PmmsConfig = LoadResourceFile("pmms", "config.lua")
         if not PmmsConfig then
            print("PMMS-DUI requires the PMMS config file to be present in the pmms resource!")
@@ -66,7 +74,7 @@ AddEventHandler('onResourceStart', function(resourceName)
                 end
             end, false)
         else
-            print("PMMS-DUI has found the PMMS config file and the URL is set correctly. PMMS-DUI is now running.")
+            debugPrint("PMMS-DUI has found the PMMS config file and the URL is set correctly. PMMS-DUI is now running.")
             SetHttpHandler(CreateHttpHandler())
         end
     end
