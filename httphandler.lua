@@ -19,7 +19,7 @@ local blockSize = 131072
 -- Maximum number of bytes to send in one ranged response
 local maxContentLength = 5242880
 
-function createHttpHandler(options)
+function CreateHttpHandler(options)
 	local resourceName = GetInvokingResource() or GetCurrentResourceName()
 	local resourcePath = GetResourcePath(resourceName)
 
@@ -495,7 +495,7 @@ function createHttpHandler(options)
 	end
 end
 
-exports("createHttpHandler", createHttpHandler)
+exports("createHttpHandler", CreateHttpHandler)
 
 exports("getUrl", function(resourceName)
 	local baseUrl = GetConvar("web_baseUrl", "")

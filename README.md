@@ -1,5 +1,24 @@
-This resource allows you to host your own version of the pmms-dui server which is required for pmms, this script allows you to automatically update the pmms config with the correct URL or do it yourself. Simply drop the pmms-dui folder into your resources and add `start pmms-dui` !!BELOW!! wherever you have `start pmms` to your server.cfg. 
+# 🚀 PMMS-DUI
+A display system hosted on its own server for the [PMMS](https://github.com/kibook/pmms) 
 
-You can also start this resource while your server is running, once you put the resource into your files, go to the live console page in txAdmin and run the commands: `refresh`, `start pmms-dui` and it should prompt you to type `updateconfig` to automatically update the pmms config file and then restart the pmms resource.
+## How to install
+---
 
-The name of the resource MUST BE `pmms-dui` and your pmms resource must be running when you start this. So make sure to add `start pmms-dui` UNDERNEATH where you `start pmms`
+- download the latest release 
+- Unzip the file and drop it in your resource folder 
+- Start resource
+- A message is displayed with your link, modify the config `Config.dui.urls.https` of the PMMS script with your link or type the command `updateconfig` in the console
+
+## 🔧 ConVars
+
+Set the following ConVars in your `server.cfg`:
+```bash
+ setr dui:debug true #Displays debug prints
+```
+
+## Credits 🤝
+
+- [Kibook](https://github.com/kibook) : PMMS and PMMS-DUI script creator (web part)
+- [JordanZABOT](https://github.com/JordanZABOT) : Add self-hosting
+
+🐞 **Please report any bugs via the [GitHub Issues](https://github.com/enzo2991/pmms-dui/issues).**
